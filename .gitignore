@@ -1,0 +1,5 @@
+*.sh
+target/
+*.iml
+*.ipr
+.idea/
