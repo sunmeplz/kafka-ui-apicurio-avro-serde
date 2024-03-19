@@ -19,7 +19,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/sunmeplz/hello-world</url>
+            <url>https://maven.pkg.github.com/sunmeplz/kafka-ui-apicurio-avro-serde</url>
         </repository>
     </distributionManagement>
 
