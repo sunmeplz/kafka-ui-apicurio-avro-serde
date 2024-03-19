@@ -55,6 +55,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>kafka-ui-apicurio-avro-serde</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
