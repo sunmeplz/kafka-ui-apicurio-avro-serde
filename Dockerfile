@@ -10,5 +10,7 @@ RUN mvn clean package -DskipTests
 
 FROM provectuslabs/kafka-ui:latest
 WORKDIR /serde
+USER 1000
 COPY --from=build /app/target/kafka-ui-apicurio-avro-serde-jar-with-dependencies.jar .
+
 
