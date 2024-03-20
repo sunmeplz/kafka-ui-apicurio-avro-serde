@@ -14,11 +14,14 @@ import org.apache.avro.io.JsonEncoder;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 public class ApicurioAvroSerde implements Serde {
 
 
+    public static final String APICURIO_REGISTRY_URL = "apicurio.registry.url";
+    public static final String APICURIO_REGISTRY_ARTIFACT_RESOLVER_STRATEGY = "apicurio.registry.artifact-resolver-strategy";
     private AvroSerde<GenericRecord> serde;
 
     @Override
@@ -27,19 +30,31 @@ public class ApicurioAvroSerde implements Serde {
         PropertyResolver clusterProperties,
         PropertyResolver appProperties
     ) {
-
         serde = new AvroSerde<>();
-        serdeProperties.getMapProperty("apicurio", String.class, String.class)
-            .ifPresent(config -> {
-                serde.configure(config, false);
-            });
+        Map<String,String> serdeConfig = extractConfiguration(serdeProperties);
+        serde.configure(serdeConfig,false);
+    }
 
+    private Map<String, String> extractConfiguration(PropertyResolver serdeProperties) {
+        Optional<String> registryUrl = serdeProperties.getProperty(APICURIO_REGISTRY_URL, String.class);
+        Optional<String> resolverStrategy = serdeProperties.getProperty(APICURIO_REGISTRY_ARTIFACT_RESOLVER_STRATEGY, String.class);
+        if (registryUrl.isEmpty() || resolverStrategy.isEmpty()){
+            throw new IllegalArgumentException("Misconfigured");
+        }
+        return Map.of(
+            APICURIO_REGISTRY_URL,registryUrl.get(),
+            APICURIO_REGISTRY_ARTIFACT_RESOLVER_STRATEGY,resolverStrategy.get()
+        );
+        //this is not works with k8s, doublequotes in properties is now allowed in config map
+//        serdeProperties.getMapProperty("apicurio", String.class, String.class)
+//            .ifPresent(config -> {
+//                serde.configure(config, false);
+//            });
     }
 
     @Override
     public Optional<String> getDescription() {
         return Optional.of("Apicurio avro serde");
-
     }
 
     @Override
@@ -50,7 +65,6 @@ public class ApicurioAvroSerde implements Serde {
     @Override
     public boolean canDeserialize(String s, Target target) {
         return true;
-
     }
 
     @Override

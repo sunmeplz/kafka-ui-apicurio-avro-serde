@@ -8,7 +8,7 @@ kafka.clusters.0.defaultValueSerde: Apicurio-avro-serde
 kafka.clusters.0.serde.0.name: Apicurio-avro-serde
 kafka.clusters.0.serde.0.filePath: /apicurio-avro-serde/kafka-ui-apicurio-avro-serde-jar-with-dependencies.jar
 kafka.clusters.0.serde.0.className: com.github.sunmeplz.kafka.ui.serdes.apicurio.avro.ApicurioAvroSerde
-kafka.clusters.0.serde.0.properties.apicurio."apicurio.registry.url": "http://schema-registry:8080/apis/registry/v2"
-kafka.clusters.0.serde.0.properties.apicurio."apicurio.registry.artifact-resolver-strategy": "io.apicurio.registry.serde.avro.strategy.QualifiedRecordIdStrategy"
+kafka.clusters.0.serde.0.properties.apicurio.registry.url: "http://schema-registry:8080/apis/registry/v2"
+kafka.clusters.0.serde.0.properties.apicurio.registry.artifact-resolver-strategy: "io.apicurio.registry.serde.avro.strategy.QualifiedRecordIdStrategy"
 
 ```
