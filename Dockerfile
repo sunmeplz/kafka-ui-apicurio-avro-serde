@@ -1,6 +1,6 @@
 # Use an official Maven image as the base image
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.10 AS build
-#FROM maven:3.9.6-eclipse-temurin-17-alpine AS build
+#FROM registry.access.redhat.com/ubi8/openjdk-17:1.10 AS build
+FROM maven:3.9.6-eclipse-temurin-17-alpine AS build
 #USER 1000
 # Set the working directory in the container
 WORKDIR /app
